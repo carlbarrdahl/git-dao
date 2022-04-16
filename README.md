@@ -1,13 +1,11 @@
-Inspired by Balaji Srinivasan's Tweet:  
-https://twitter.com/balajis/status/1326313315044192256?lang=en
+# Git DAO
 
-Also mentioned in:  
-DappCamp X Balaji Srinivasan - Open Problems in Crypto Infrastructure  
-https://www.youtube.com/watch?v=l2VQkbucXns
+<div>
+  <img align="top" width="48%" src=".screenshots/onboard_1.png" />
+  <img align="top" width="48%" src=".screenshots/onboard_1.png" />
+</div>
 
---- 
-
-An ERC20 token with a fixed supply is created for the repository with a portion minted to the owner. The owner can reward tokens to contributors of the project such as bug reports or solving issues.  
+An ERC20 token with a fixed supply is created for the repository with a portion minted to the owner. The owner can reward tokens to contributors of the project such as bug reports or solving issues.
 
 This token will initially have 0 value but the creator can create an initial funding of the project themselves by providing tokens + ETH to an AMM like Uniswap. A market is then created around the token and contributors who have been rewarded can swap their tokens to ETH if they choose to (and speculators can buy tokens for ETH).
 
@@ -20,6 +18,7 @@ This token can also be used in Governance where the community votes for proposal
 GitHub provides an amazing interface for browsing code, issues, pull requests, project boards etc and users are familiar with it. This idea is utilizing Github as an interface and combining with a layer of smart contracts to create a hybrid app. In the future something like Radicle could be used to move towards more decentralization.
 
 ### How does it work?
+
 1. Sign in with Github to see what repos the user has access to
 2. Send repo to smart contract which creates an ERC20 token with 1M supply and mints 10k to owner (1% of all tokens)
 3. A signed hash is used to verify the repo is owned by the user calling the contract
@@ -30,3 +29,12 @@ GitHub provides an amazing interface for browsing code, issues, pull requests, p
 This project is being built to bootstrap itself using this idea.
 
 If you want to participate in any way please join the https://github.com/carlbarrdahl/git-dao/discussions!
+
+---
+
+Inspired by Balaji Srinivasan's Tweet:  
+https://twitter.com/balajis/status/1326313315044192256?lang=en
+
+Also mentioned in:  
+DappCamp X Balaji Srinivasan - Open Problems in Crypto Infrastructure  
+https://www.youtube.com/watch?v=l2VQkbucXns
