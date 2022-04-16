@@ -2,7 +2,7 @@
 
 <div>
   <img align="top" width="48%" src=".screenshots/onboard_1.png" />
-  <img align="top" width="48%" src=".screenshots/onboard_1.png" />
+  <img align="top" width="48%" src=".screenshots/onboard_2.png" />
 </div>
 
 An ERC20 token with a fixed supply is created for the repository with a portion minted to the owner. The owner can reward tokens to contributors of the project such as bug reports or solving issues.
