@@ -1,10 +1,5 @@
 # Git DAO
 
-<div>
-  <img align="top" width="48%" src=".screenshots/onboard_1.png" />
-  <img align="top" width="48%" src=".screenshots/onboard_2.png" />
-</div>
-
 An ERC20 token with a fixed supply is created for the repository with a portion minted to the owner. The owner can reward tokens to contributors of the project such as bug reports or solving issues.
 
 This token will initially have 0 value but the creator can create an initial funding of the project themselves by providing tokens + ETH to an AMM like Uniswap. A market is then created around the token and contributors who have been rewarded can swap their tokens to ETH if they choose to (and speculators can buy tokens for ETH).
@@ -25,6 +20,9 @@ GitHub provides an amazing interface for browsing code, issues, pull requests, p
 4. The owner can optionally supply their tokens to Uniswap with ETH to create initial market (1 ETH at $3000 + 10k tokens would create a market cap of $300 000)
 5. People can participate by contributing with code, bug reports or other ways to create value to the project and be rewarded in tokens for their work.
 6. People or companies can fund the project or even specific issues to help with prioritization
+
+![](https://github.com/carlbarrdahl/git-dao/raw/master/.screenshots/onboard_1.png)
+![](https://github.com/carlbarrdahl/git-dao/raw/master/.screenshots/onboard_2.png)
 
 This project is being built to bootstrap itself using this idea.
 
