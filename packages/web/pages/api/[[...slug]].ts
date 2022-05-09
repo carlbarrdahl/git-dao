@@ -9,9 +9,9 @@ const WALLET_MNEMONIC = process.env.WALLET_MNEMONIC || "";
 
 const wallet = ethers.Wallet.fromMnemonic(WALLET_MNEMONIC);
 
-export default nc<NextApiRequest, NextApiResponse>({ attachParams: true })
-  //   .use("/api/hello", someMiddleware())
-  .post("/api/signature", async (req, res) => {
+export default nc<NextApiRequest, NextApiResponse>({ attachParams: true }).post(
+  "/api/signature",
+  async (req, res) => {
     const session = await getSession({ req });
     console.log("session", session);
     const { repo, address } = req.body;
@@ -29,4 +29,5 @@ export default nc<NextApiRequest, NextApiResponse>({ attachParams: true })
     const signature = await wallet.signMessage(ethers.utils.arrayify(hash));
 
     res.status(200).json({ hash, signature });
-  });
+  }
+);
