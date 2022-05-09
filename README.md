@@ -53,5 +53,5 @@ Also mentioned in:
 DappCamp X Balaji Srinivasan - Open Problems in Crypto Infrastructure  
 https://www.youtube.com/watch?v=l2VQkbucXns
 
-Madhavan Malolan's LaunchDAO:
+Madhavan Malolan's LaunchDAO:  
 https://mirror.xyz/madhavanmalolan.eth/OMGH_SQ9E97r2-iXzY2ndQQgOuTUXdVaM-VBoiT0mIg
