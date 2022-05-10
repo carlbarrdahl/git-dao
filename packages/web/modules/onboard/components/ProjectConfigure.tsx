@@ -86,8 +86,8 @@ export default function ProjectConfigure({ repo, onSuccess }: Props) {
         </Text>
         <Input value={3600 * 24 * 365} disabled />
       </FormLabel>
-      <ErrorMessage error={project.error} />
-      <ErrorMessage error={{ message: sig.error?.data }} />
+      {project.error && <ErrorMessage error={project.error} />}
+      {sig.error && <ErrorMessage error={{ message: sig.error?.data }} />}
 
       <Button
         w="100%"
