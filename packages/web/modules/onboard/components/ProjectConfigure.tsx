@@ -54,7 +54,7 @@ export default function ProjectConfigure({ repo, onSuccess }: Props) {
     );
   }
 
-  console.log("error", project.error?.data?.message);
+  console.log("error", project.error, sig.error);
   return (
     <Box
       borderRadius={6}
@@ -86,8 +86,8 @@ export default function ProjectConfigure({ repo, onSuccess }: Props) {
         </Text>
         <Input value={3600 * 24 * 365} disabled />
       </FormLabel>
-      {project.error && <ErrorMessage error={project.error} />}
-      {sig.error && <ErrorMessage error={{ message: sig.error?.data }} />}
+      <ErrorMessage error={project.error} />
+      <ErrorMessage error={sig.error} />
 
       <Button
         w="100%"
