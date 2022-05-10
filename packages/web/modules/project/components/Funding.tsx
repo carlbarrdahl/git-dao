@@ -21,15 +21,17 @@ export default function Funding({ address }: { address: string }) {
   const end = addSeconds(new Date(), duration);
 
   return (
-    <BorderedBox>
-      <Stat>
-        <StatLabel>Funding</StatLabel>
-        <StatNumber>{ethers.utils.formatUnits(funded)}</StatNumber>
-        <StatHelpText>
-          {/* @ts-ignore */}
-          Vesting: {formatDate(new Date(start * 1000))} - {formatDate(end)}
-        </StatHelpText>
-      </Stat>
-    </BorderedBox>
+    <>
+      <BorderedBox>
+        <Stat>
+          <StatLabel>Funding</StatLabel>
+          <StatNumber>{ethers.utils.formatUnits(funded)}</StatNumber>
+          <StatHelpText>
+            {/* @ts-ignore */}
+            Vesting: {formatDate(new Date(start * 1000))} - {formatDate(end)}
+          </StatHelpText>
+        </Stat>
+      </BorderedBox>
+    </>
   );
 }

@@ -2,9 +2,8 @@ import axios from "lib/axios";
 import { useMutation } from "react-query";
 import { useContractWrite } from "wagmi";
 
-import ProjectFactory from "contracts/ProjectFactory.json";
-
-const PROJECT_FACTORY_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+import { useContractAddresses } from "modules/project/hooks/useProjectAddress";
+import { contractTypes } from "config";
 
 type SignatureResponse = { hash: string; signature: string };
 
@@ -19,10 +18,11 @@ export function useCreateRepoSignature() {
 }
 
 export function useCreateProject() {
+  const addresses = useContractAddresses();
   return useContractWrite(
     {
-      addressOrName: PROJECT_FACTORY_ADDRESS,
-      contractInterface: ProjectFactory.abi,
+      addressOrName: addresses.projectFactory,
+      contractInterface: contractTypes.projectFactory,
     },
     "create"
   );
