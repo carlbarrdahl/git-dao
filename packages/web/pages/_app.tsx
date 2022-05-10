@@ -10,13 +10,11 @@ import { SessionProvider } from "next-auth/react";
 import { providers } from "ethers";
 import { QueryClientProvider } from "react-query";
 import { InjectedConnector } from "@wagmi/core";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
 const client = createClient({
   autoConnect: true,
   provider: ({ chainId }) => {
     if (chainId == 31337) {
-      const chain = allChains.find((x) => x.id == 31337)?.rpcUrls.default;
       return new providers.JsonRpcProvider("http://localhost:8545", 31337);
     }
     // return new providers.AlchemyProvider(
@@ -30,7 +28,7 @@ const client = createClient({
   connectors: ({}) => {
     return [
       new InjectedConnector({
-        chains: [...defaultChains, chain.hardhat, chain.polygon],
+        chains: [chain.rinkeby, chain.hardhat],
         options: { shimDisconnect: true },
       }),
     ];

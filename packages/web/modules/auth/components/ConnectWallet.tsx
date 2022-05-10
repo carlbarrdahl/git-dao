@@ -3,13 +3,7 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import Avatar from "boring-avatars";
 
 import { truncate } from "utils/truncate";
-import {
-  InjectedConnector,
-  defaultChains,
-  chain,
-  defaultL2Chains,
-} from "@wagmi/core";
-import { useMountedState } from "react-use";
+import { InjectedConnector, chain } from "@wagmi/core";
 
 function ConnectedAccount({ address, onDisconnect }) {
   return (
@@ -24,21 +18,13 @@ function ConnectedAccount({ address, onDisconnect }) {
 }
 
 export default function ConnectWallet() {
-  const isMounted = useMountedState();
-
   const { data: account } = useAccount();
   const { disconnect } = useDisconnect();
   const { connect, isConnecting } = useConnect({
     connector: new InjectedConnector({
-      chains: [
-        ...defaultChains,
-        chain.hardhat, // Only in dev
-        //chain.gnosis
-      ],
+      chains: [chain.rinkeby, chain.hardhat],
     }),
   });
-
-  if (!isMounted()) return null;
 
   if (isConnecting) {
     return (

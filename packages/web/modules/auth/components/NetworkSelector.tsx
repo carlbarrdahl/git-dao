@@ -6,14 +6,15 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  HStack,
+  Tooltip,
+  Box,
 } from "@chakra-ui/react";
 import { useNetwork } from "wagmi";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import { SiEthereum } from "react-icons/si";
-import { useMountedState } from "react-use";
 
 export default function NetworkSelector() {
-  const isMounted = useMountedState();
   const {
     activeChain,
     chains,
@@ -22,6 +23,10 @@ export default function NetworkSelector() {
     pendingChainId,
     switchNetwork,
   } = useNetwork();
+
+  console.log(activeChain, error);
+
+  const supportedChain = chains.find((c) => c.id === activeChain?.id);
 
   if (isLoading) {
     return (
@@ -35,30 +40,38 @@ export default function NetworkSelector() {
       </Flex>
     );
   }
-
-  if (error) {
-    return <pre>{error.message}</pre>;
+  if (!activeChain) {
+    return null;
   }
   return (
-    <Menu>
-      <MenuButton
-        as={Button}
-        variant="outline"
-        leftIcon={<SiEthereum />}
-        rightIcon={<ChevronDownIcon />}
-      >
-        {activeChain?.name}
-      </MenuButton>
-      <MenuList>
-        {chains.map((chain) => (
-          <MenuItem
-            key={chain.id}
-            onClick={() => switchNetwork && switchNetwork(chain.id)}
-          >
-            {chain.name}
-          </MenuItem>
-        ))}
-      </MenuList>
-    </Menu>
+    <HStack>
+      {error && (
+        <Tooltip label={error?.message}>
+          <Box pr={2}>
+            <WarningTwoIcon color="red.500" />
+          </Box>
+        </Tooltip>
+      )}
+      <Menu>
+        <MenuButton
+          as={Button}
+          variant="outline"
+          leftIcon={<SiEthereum />}
+          rightIcon={<ChevronDownIcon />}
+        >
+          {(supportedChain && activeChain?.name) || "Unsupported chain"}
+        </MenuButton>
+        <MenuList>
+          {chains.map((chain) => (
+            <MenuItem
+              key={chain.id}
+              onClick={() => switchNetwork && switchNetwork(chain.id)}
+            >
+              {chain.name}
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Menu>
+    </HStack>
   );
 }

@@ -4,12 +4,9 @@ import { useRouter } from "next/router";
 import Layout from "components/Layout";
 import {
   Box,
-  Flex,
   Button,
-  Skeleton,
   Text,
   Heading,
-  Container,
   Grid,
   HStack,
   Divider,
@@ -18,12 +15,11 @@ import Markdown from "components/Markdown";
 import { useGithubContent } from "modules/project/hooks/useGithubContent";
 import { useProjectAddress } from "modules/project/hooks/useProjectAddress";
 import Link from "next/link";
-import { useProvider } from "wagmi";
 import Funding from "modules/project/components/Funding";
 import Fund from "modules/project/components/Fund";
 import TokenSupply from "modules/project/components/TokenSupply";
-import TokenHolders from "modules/project/components/TokenHolders";
 import MintTokens from "modules/project/components/MintTokens";
+import WithdrawFunding from "modules/project/components/WithdrawFunding";
 
 const GithubContent = ({
   repo,
@@ -40,14 +36,6 @@ const GithubContent = ({
     return <pre>404: not found</pre>;
   }
   return <Markdown>{data}</Markdown>;
-};
-
-const NetworkGuard = ({ children }) => {
-  const provider = useProvider();
-  // if (!isMounted()) return null;
-
-  if (!provider.network) return null;
-  return children;
 };
 
 const NULL_ADDRESS = "0x0000000000000000000000000000000000000000";
@@ -69,11 +57,13 @@ const ProjectDetails = ({ repo }: { repo: string }) => {
   return (
     <Box>
       <Funding address={address} />
-      <Divider my={4} />
+      <Divider my={4} borderColor="white" />
+      <WithdrawFunding address={address} />
+      <Divider my={4} borderColor="white" />
       <TokenSupply address={address} />
-      <Divider my={4} />
+      <Divider my={4} borderColor="white" />
       <Fund address={address} />
-      <Divider my={4} />
+      <Divider my={4} borderColor="white" />
       <MintTokens address={address} />
     </Box>
   );
