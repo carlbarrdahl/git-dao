@@ -8,42 +8,74 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import Link from "next/link";
+import { DefaultSeo } from "next-seo";
+
 import NetworkSelector from "modules/auth/components/NetworkSelector";
 import ConnectWallet from "modules/auth/components/ConnectWallet";
-import Link from "next/link";
 
 interface Props {
   children: React.ReactNode;
   title?: string;
 }
 const maxWidth = "container.xl";
-export default function Layout({ children, title = "gitDAO" }: Props) {
+export default function Layout({ children, title = "Git DAO" }: Props) {
   const borderColor = useColorModeValue("gray.100", "gray.700");
 
+  title = "Git DAO - Tokenize your GitHub project";
+  const description = "Create a DAO from your GiHub repo";
+  const url = "https://git-dao.vercel.app";
   return (
-    <Flex flexDir={"column"} minH={"100vh"}>
+    <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content="..." />
+        <meta name="description" content="Decentralized powered by Ceramic" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex as="header" borderBottom={"1px solid"} borderColor={borderColor}>
-        <Flex as={Container} maxW={maxWidth} justify="space-between" py={4}>
-          <Link href={"/"}>
-            <Heading>{title}</Heading>
-          </Link>
-          <HStack>
-            <NetworkSelector />
-            <ConnectWallet />
-          </HStack>
+      <DefaultSeo
+        title={title}
+        description={description}
+        canonical={url}
+        openGraph={{
+          url,
+          title,
+          description,
+          images: [
+            {
+              url: `${url}/gitdao.jpg`,
+              width: 1024,
+              height: 537,
+              alt: "Git DAO",
+              type: "image/jpeg",
+            },
+          ],
+          type: "website",
+          site_name: "Git DAO",
+        }}
+        twitter={{
+          handle: "@CarlBarrdahl",
+          site: "@CarlBarrdahl",
+          cardType: "summary_large_image",
+        }}
+      />
+      <Flex flexDir={"column"} minH={"100vh"}>
+        <Flex as="header" borderBottom={"1px solid"} borderColor={borderColor}>
+          <Flex as={Container} maxW={maxWidth} justify="space-between" py={4}>
+            <Link href={"/"} passHref>
+              <Heading as="a">Git DAO</Heading>
+            </Link>
+            <HStack>
+              <NetworkSelector />
+              <ConnectWallet />
+            </HStack>
+          </Flex>
         </Flex>
+        <Box bg="white" flex={1}>
+          <Container maxW={maxWidth} pt={14} pb={24}>
+            {children}
+          </Container>
+        </Box>
+        <Box as="footer" py={32} bg={"gray.900"} />
       </Flex>
-      <Box bg="white" flex={1}>
-        <Container maxW={maxWidth} pt={14} pb={24}>
-          {children}
-        </Container>
-      </Box>
-      <Box as="footer" py={32} bg={"gray.900"} />
-    </Flex>
+    </>
   );
 }
