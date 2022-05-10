@@ -121,11 +121,18 @@ describe("ProjectFactory", async function () {
         expect(ethers.utils.formatEther(await project.fundedAmount())).to.eq(
           "1.0"
         );
+
+        console.log((await project.availableFunds()).toString());
         const balanceBefore = await ethers.provider.getBalance(owner.address);
 
         // Move time forward to test vesting release
         await ethers.provider.send("evm_increaseTime", [vestingDuration / 2]);
+        await ethers.provider.send("evm_mine", []);
 
+        console.log((await project.availableFunds()).toString());
+        expect(
+          ethers.utils.formatEther(await project.availableFunds()).substr(0, 4)
+        ).to.eq("0.50");
         await project.withdraw();
 
         const balanceAfter = await ethers.provider.getBalance(owner.address);

@@ -47,6 +47,14 @@ contract Project is
         return vestedAmount(uint64(block.timestamp + duration()));
     }
 
+    function availableFunds() external view returns (uint256) {
+        return vestedAmount(uint64(block.timestamp));
+    }
+
+    function releasedFunds() external view returns (uint256) {
+        return released();
+    }
+
     function withdraw() external {
         return release();
     }
