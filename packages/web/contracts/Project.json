@@ -118,6 +118,19 @@
     },
     {
       "inputs": [],
+      "name": "availableFunds",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "beneficiary",
       "outputs": [
         {
@@ -251,6 +264,19 @@
         }
       ],
       "name": "released",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "releasedFunds",
       "outputs": [
         {
           "internalType": "uint256",
