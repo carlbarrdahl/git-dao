@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Button,
   Container,
   Flex,
   Heading,
@@ -60,9 +61,13 @@ export default function Layout({ children, title = "Git DAO" }: Props) {
       <Flex flexDir={"column"} minH={"100vh"}>
         <Flex as="header" borderBottom={"1px solid"} borderColor={borderColor}>
           <Flex as={Container} maxW={maxWidth} justify="space-between" py={4}>
-            <Link href={"/"} passHref>
-              <Heading as="a">Git DAO</Heading>
-            </Link>
+            <HStack>
+              <Link href={"/"} passHref>
+                <Heading as="a">Git DAO</Heading>
+              </Link>
+
+              <NavLink href={"/onboard"}>New project</NavLink>
+            </HStack>
             <HStack>
               <NetworkSelector />
               <ConnectWallet />
@@ -77,5 +82,13 @@ export default function Layout({ children, title = "Git DAO" }: Props) {
         <Box as="footer" py={32} bg={"gray.900"} />
       </Flex>
     </>
+  );
+}
+
+function NavLink({ href, ...props }) {
+  return (
+    <Link href={href} passHref>
+      <Button variant={"ghost"} {...props} />
+    </Link>
   );
 }
