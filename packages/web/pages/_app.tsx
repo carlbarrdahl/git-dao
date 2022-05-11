@@ -1,15 +1,15 @@
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { Provider, createClient, allChains, defaultChains, chain } from "wagmi";
+import { Provider, createClient, chain } from "wagmi";
 
-// import { Provider, chain, defaultChains, InjectedConnector } from "wagmi";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 
 import { providers } from "ethers";
 import { QueryClientProvider } from "react-query";
 import { InjectedConnector } from "@wagmi/core";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 const client = createClient({
   autoConnect: true,
@@ -17,19 +17,19 @@ const client = createClient({
     if (chainId == 31337) {
       return new providers.JsonRpcProvider("http://localhost:8545", 31337);
     }
-    // return new providers.AlchemyProvider(
-    //   "homestead",
-    //   "YaEs2qJRHnULbXiSQBb2_7O64xlID2_Y"
-    // );
     return new providers.InfuraProvider(chainId);
-    // return providers.getDefaultProvider(chainId);
   },
-  // connectors: [connector],
   connectors: ({}) => {
     return [
       new InjectedConnector({
         chains: [chain.rinkeby, chain.hardhat],
         options: { shimDisconnect: true },
+      }),
+      new WalletConnectConnector({
+        chains: [chain.mainnet, chain.optimism],
+        options: {
+          qrcode: true,
+        },
       }),
     ];
   },

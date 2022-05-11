@@ -1,4 +1,16 @@
-import { Button, Flex, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Spinner,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import Avatar from "boring-avatars";
 
@@ -18,13 +30,10 @@ function ConnectedAccount({ address, onDisconnect }) {
 }
 
 export default function ConnectWallet() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: account } = useAccount();
   const { disconnect } = useDisconnect();
-  const { connect, isConnecting } = useConnect({
-    connector: new InjectedConnector({
-      chains: [chain.rinkeby, chain.hardhat],
-    }),
-  });
+  const { connect, connectors, isConnecting } = useConnect();
 
   if (isConnecting) {
     return (
@@ -40,9 +49,35 @@ export default function ConnectWallet() {
   }
   const { address } = account || {};
 
-  return address ? (
-    <ConnectedAccount address={address} onDisconnect={disconnect} />
-  ) : (
-    <Button onClick={() => connect()}>Connect wallet</Button>
+  return (
+    <>
+      {address ? (
+        <ConnectedAccount address={address} onDisconnect={disconnect} />
+      ) : (
+        <Button onClick={() => onOpen()}>Connect wallet</Button>
+      )}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Connect Wallet</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {connectors.map((x) => (
+              <Button
+                w="100%"
+                key={x.id}
+                onClick={() => {
+                  connect(x);
+                  onClose();
+                }}
+                mb={2}
+              >
+                {x.name}
+              </Button>
+            ))}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
