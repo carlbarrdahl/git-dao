@@ -11,6 +11,7 @@ import { QueryClientProvider } from "react-query";
 import { InjectedConnector } from "@wagmi/core";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
+const chains = [chain.rinkeby, chain.hardhat];
 const client = createClient({
   autoConnect: true,
   provider: ({ chainId }) => {
@@ -22,11 +23,11 @@ const client = createClient({
   connectors: ({}) => {
     return [
       new InjectedConnector({
-        chains: [chain.rinkeby, chain.hardhat],
+        chains,
         options: { shimDisconnect: true },
       }),
       new WalletConnectConnector({
-        chains: [chain.mainnet, chain.optimism],
+        chains,
         options: {
           qrcode: true,
         },
